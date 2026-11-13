@@ -1,1 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YOUR LUCK</title>
+<style>
+body {
+  margin:0;
+  background:#101010;
+  color:white;
+  font-family:Arial,sans-serif;
+}
+header {
+  background:#191919;
+  padding:22px;
+  text-align:center;
+  border-bottom:2px solid gold;
+}
+h1 {color:gold;margin:0;}
+.balance {
+  background:#242424;
+  margin:18px;
+  padding:20px;
+  border-radius:12px;
+  text-align:center;
+}
+.balance h2 {color:gold;}
+.games {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  padding:15px;
+}
+.game {
+  background:#222;
+  border:1px solid #555;
+  border-radius:14px;
+  padding:24px 10px;
+  text-align:center;
+}
+.game button {
+  background:gold;
+  color:black;
+  border:0;
+  padding:11px 20px;
+  border-radius:7px;
+  font-weight:bold;
+}
+#result {
+  text-align:center;
+  color:#00ff99;
+  font-size:20px;
+  padding:15px;
+}
+footer {
+  text-align:center;
+  padding:20px;
+  color:#aaa;
+}
+</style>
+</head>
+<body>
 
+<header>
+<h1>🍀 YOUR LUCK</h1>
+<p>PLAY GAMES • TEST YOUR LUCK</p>
+</header>
+
+<div class="balance">
+<h3>YOUR VIRTUAL COINS</h3>
+<h2 id="coins">1000 🪙</h2>
+</div>
+
+<h2 style="text-align:center">🎮 ALL GAMES</h2>
+
+<div class="games">
+
+<div class="game">
+<h2>✈️ Aviator</h2>
+<p>Crash Simulator</p>
+<button onclick="aviator()">Play</button>
+</div>
+
+<div class="game">
+<h2>🎡 Lucky Spin</h2>
+<p>Spin the wheel</p>
+<button onclick="spin()">Play</button>
+</div>
+
+<div class="game">
+<h2>🎲 Lucky Dice</h2>
+<p>Roll the dice</p>
+<button onclick="dice()">Play</button>
+</div>
+
+<div class="game">
+<h2>🃏 Memory Game</h2>
+<p>Test your memory</p>
+<button onclick="memory()">Play</button>
+</div>
+
+<div class="game">
+<h2>🧩 Lucky Quiz</h2>
+<p>Test your knowledge</p>
+<button onclick="quiz()">Play</button>
+</div>
+
+<div class="game">
+<h2>🎯 Number Game</h2>
+<p>Guess the number</p>
+<button onclick="numberGame()">Play</button>
+</div>
+
+</div>
+
+<div id="result">Welcome to YOUR LUCK! 🍀</div>
+
+<footer>
+<p>YOUR LUCK © 2026</p>
+<p>Free games • Virtual coins only</p>
+</footer>
+
+<script>
+let coins=1000;
+
+function update(){
+document.getElementById("coins").innerText=coins+" 🪙";
+}
+
+function reward(){
+coins+=10;
+update();
+}
+
+function aviator(){
+let x=(1+Math.random()*4).toFixed(2);
+document.getElementById("result").innerText=
+"✈️ Demo flight ended at "+x+"x";
+reward();
+}
+
+function spin(){
+let prizes=[10,20,30,50,100];
+let p=prizes[Math.floor(Math.random()*prizes.length)];
+coins+=p;
+update();
+document.getElementById("result").innerText=
+"🎡 You won "+p+" virtual coins!";
+}
+
+function dice(){
+let n=Math.floor(Math.random()*6)+1;
+document.getElementById("result").innerText=
+"🎲 Your dice number: "+n;
+reward();
+}
+
+function memory(){
+let a=["🍎","🍋","🍇","🍎","🍋","🍇"];
+a.sort(()=>Math.random()-0.5);
+document.getElementById("result").innerText=
+"🧠 Remember: "+a.join(" ");
+}
+
+function quiz(){
+let ans=prompt("How many days are there in a week?");
+if(ans==="7"){
+reward();
+document.getElementById("result").innerText="Correct! +10 coins 🎉";
+}else{
+document.getElementById("result").innerText="Try again!";
+}
+}
+
+function numberGame(){
+let n=Math.floor(Math.random()*10)+1;
+let g=prompt("Guess a number between 1 and 10");
+document.getElementById("result").innerText=
+Number(g)===n?"Correct! Number was "+n:"Number was "+n+". Try again!";
+if(Number(g)===n) reward();
+}
+</script>
+
+</body>
+</html>
