@@ -4,83 +4,69 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Your Luck - Lucky Spin</title>
+
 <style>
 *{box-sizing:border-box}
 body{
-margin:0;
-font-family:Arial,sans-serif;
-background:linear-gradient(135deg,#ffe4f4,#e8d5ff);
-color:#55216c;
-text-align:center;
-min-height:100vh;
-padding:20px;
+ margin:0;padding:15px;font-family:Arial,sans-serif;
+ background:linear-gradient(135deg,#ffe4f4,#e8d5ff);
+ color:#55216c;text-align:center;min-height:100vh
 }
 .container{
-max-width:450px;
-margin:25px auto;
-background:white;
-padding:25px 18px;
-border-radius:25px;
-box-shadow:0 10px 35px #a65bb555;
+ max-width:450px;margin:20px auto;background:white;
+ padding:22px 16px;border-radius:25px;
+ box-shadow:0 10px 35px #a65bb555
 }
-h1{color:#c02b91;margin:5px}
+h1{color:#c02b91;margin:8px}
 .subtitle{color:#8550a4}
+.panel{
+ background:#17172b;color:white;padding:18px;
+ border-radius:16px;margin:15px auto;max-width:450px
+}
+input{
+ padding:13px;width:90%;margin:7px;
+ border:1px solid #ddd;border-radius:9px;font-size:16px
+}
+button{
+ border:0;padding:14px 25px;border-radius:30px;
+ background:linear-gradient(90deg,#ec4899,#9333ea);
+ color:white;font-size:17px;font-weight:bold;
+ cursor:pointer;margin:7px
+}
+button:disabled{opacity:.5}
 .coins{
-background:#fff0fa;
-padding:12px;
-border-radius:15px;
-font-size:21px;
-font-weight:bold;
-margin:20px 0;
+ background:#fff0fa;padding:13px;border-radius:15px;
+ font-size:21px;font-weight:bold;margin:18px 0
 }
 .wheel-wrap{
-width:min(300px,80vw);
-height:min(300px,80vw);
-margin:25px auto;
-position:relative;
+ width:min(300px,80vw);height:min(300px,80vw);
+ margin:25px auto;position:relative
 }
 .pointer{
-position:absolute;
-top:-13px;
-left:50%;
-transform:translateX(-50%);
-z-index:2;
-font-size:35px;
-color:#9d36bd;
+ position:absolute;top:-15px;left:50%;
+ transform:translateX(-50%);z-index:2;
+ font-size:35px;color:#9d36bd
 }
 #wheel{
-width:100%;
-height:100%;
-border-radius:50%;
-border:8px solid white;
-box-shadow:0 4px 20px #9146aa66;
-background:conic-gradient(
-#ff69b4 0deg 60deg,
-#9b59b6 60deg 120deg,
-#ffb6d9 120deg 180deg,
-#7d3c98 180deg 240deg,
-#ff69b4 240deg 300deg,
-#c39bd3 300deg 360deg);
-transition:transform 5s cubic-bezier(.15,.7,.1,1);
-position:relative;
+ width:100%;height:100%;border-radius:50%;
+ border:8px solid white;
+ box-shadow:0 4px 20px #9146aa66;
+ background:conic-gradient(
+ #ff69b4 0deg 60deg,#9b59b6 60deg 120deg,
+ #ffb6d9 120deg 180deg,#7d3c98 180deg 240deg,
+ #ff69b4 240deg 300deg,#c39bd3 300deg 360deg);
+ transition:transform 5s cubic-bezier(.15,.7,.1,1);
+ position:relative
 }
 .labels{
-position:absolute;
-inset:0;
-border-radius:50%;
-pointer-events:none;
+ position:absolute;inset:0;border-radius:50%;
+ pointer-events:none
 }
 .labels span{
-position:absolute;
-left:50%;
-top:50%;
-width:65px;
-margin-left:-32px;
-margin-top:-12px;
-font-size:17px;
-font-weight:bold;
-color:white;
-text-shadow:1px 1px 3px #633;
+ position:absolute;left:50%;top:50%;width:65px;
+ margin-left:-32px;margin-top:-12px;
+ font-size:17px;font-weight:bold;color:white;
+ text-shadow:1px 1px 3px #633
 }
 .labels span:nth-child(1){transform:rotate(30deg) translateY(-100px) rotate(-30deg)}
 .labels span:nth-child(2){transform:rotate(90deg) translateY(-100px) rotate(-90deg)}
@@ -88,39 +74,41 @@ text-shadow:1px 1px 3px #633;
 .labels span:nth-child(4){transform:rotate(210deg) translateY(-100px) rotate(-210deg)}
 .labels span:nth-child(5){transform:rotate(270deg) translateY(-100px) rotate(-270deg)}
 .labels span:nth-child(6){transform:rotate(330deg) translateY(-100px) rotate(-330deg)}
-button{
-border:0;
-padding:15px 35px;
-border-radius:30px;
-background:linear-gradient(90deg,#ec4899,#9333ea);
-color:white;
-font-size:20px;
-font-weight:bold;
-cursor:pointer;
-box-shadow:0 5px 15px #b65bc566;
-}
-button:disabled{opacity:.6}
-#result{
-font-size:23px;
-font-weight:bold;
-margin:22px 0;
-min-height:30px;
-color:#a0269b;
-}
-.note{font-size:12px;color:#888;margin-top:20px}
+#result{font-size:21px;font-weight:bold;margin:20px 0;min-height:30px}
+.note{font-size:12px;color:#888}
+.hidden{display:none}
 </style>
 </head>
+
 <body>
-  <div id="wallet" style="background:#17172b;color:white;padding:20px;border-radius:15px;text-align:center;margin:20px 0;">
-  <h2>🪙 Your Luck Wallet</h2>
-  <h1 id="coinBalance">0 Coins</h1>
-  <p>Total Coin Supply: 500000</p>
-</div>
+
 <div class="container">
-<h1>💜 Your-Luck 💜</h1>
+<h1>💜 YOUR LUCK 💜</h1>
 <p class="subtitle">✨ Lucky Spin Gaming Platform ✨</p>
 
-<div class="coins">🪙 Virtual Coins: <span id="coins">0</span></div>
+<div class="panel" id="authBox">
+<h2>🍀 Mobile Login</h2>
+<input id="mobile" type="tel" maxlength="10"
+placeholder="10 digit mobile number">
+<div id="recaptcha-container"></div>
+<button id="sendButton" onclick="sendOTP()">Send OTP</button>
+
+<input id="otp" type="text" inputmode="numeric"
+placeholder="Enter OTP">
+<button onclick="verifyOTP()">Verify OTP</button>
+<p id="authMessage">Login karne ke liye mobile number dalo.</p>
+</div>
+
+<div id="gameBox" class="hidden">
+<div class="panel">
+<h2>🪙 Your Luck Wallet</h2>
+<h1 id="coinBalance">0 Coins</h1>
+<p>Virtual Coin Demo</p>
+</div>
+
+<div class="coins">
+🪙 Virtual Coins: <span id="coins">0</span>
+</div>
 
 <div class="wheel-wrap">
 <div class="pointer">▼</div>
@@ -134,277 +122,197 @@ color:#a0269b;
 
 <button id="spin" onclick="spinWheel()">🎡 SPIN NOW</button>
 <div id="result">Good Luck! ❤️</div>
-<p class="note">This is a virtual coin demo game. No real money or prizes.</p>
+<button onclick="logout()">Logout</button>
 </div>
 
-<script>
-  // 🎉 YOUR LUCK WINNING EFFECTS
-
-const style = document.createElement("style");
-style.textContent = `
-.win-popup {
-  position:fixed;
-  top:35%;
-  left:10%;
-  width:80%;
-  padding:25px 10px;
-  background:linear-gradient(135deg,#ff69b4,#8a2be2);
-  color:white;
-  text-align:center;
-  border-radius:20px;
-  font-size:22px;
-  z-index:9999;
-  box-shadow:0 0 30px pink;
-  animation:pop .5s ease;
-}
-@keyframes pop {
-  from {transform:scale(.2);opacity:0}
-  to {transform:scale(1);opacity:1}
-}
-.confetti {
-  position:fixed;
-  top:-20px;
-  z-index:9998;
-  font-size:25px;
-  pointer-events:none;
-  animation:fall 2.5s linear forwards;
-}
-@keyframes fall {
-  to {transform:translateY(110vh) rotate(720deg);opacity:0}
-}
-`;
-document.head.appendChild(style);
-
-function winSound() {
-  try {
-    const audio = new AudioContext();
-    [523,659,784,1046].forEach((freq,i)=>{
-      const oscillator=audio.createOscillator();
-      const gain=audio.createGain();
-      oscillator.frequency.value=freq;
-      oscillator.connect(gain);
-      gain.connect(audio.destination);
-      gain.gain.setValueAtTime(.12,audio.currentTime+i*.12);
-      gain.gain.exponentialRampToValueAtTime(
-        .001,audio.currentTime+i*.12+.2
-      );
-      oscillator.start(audio.currentTime+i*.12);
-      oscillator.stop(audio.currentTime+i*.12+.2);
-    });
-  } catch(e) {}
-}
-
-function showWin() {
-  winSound();
-
-  const popup=document.createElement("div");
-  popup.className="win-popup";
-  popup.innerHTML="🎉 CONGRATULATIONS! 🎉<br>🏆 YOU WON!";
-
-  document.body.appendChild(popup);
-
-  for(let i=0;i<35;i++){
-    const c=document.createElement("div");
-    c.className="confetti";
-    c.innerText=["🎊","✨","💖","🌟"][Math.floor(Math.random()*4)];
-    c.style.left=Math.random()*100+"vw";
-    document.body.appendChild(c);
-    setTimeout(()=>c.remove(),2500);
-  }
-
-  setTimeout(()=>popup.remove(),2500);
-}
-
-const resultBox=document.getElementById("result");
-
-if(resultBox){
-  const observer=new MutationObserver(()=>{
-    if(/won|जीते| जीत/i.test(resultBox.innerText)){
-      showWin();
-    }
-  });
-  observer.observe(resultBox,{childList:true,characterData:true,subtree:true});
-  }
-  
-let total=0;
-let rotation=0;
-let spinning=false;
-const prizes=[10,20,30,50,100,500];
-
-function spinWheel(){
-  let spinAudioCtx, spinOsc, spinGain, spinLfo, spinLfoGain;
-
-function startSpinSound(){
-  spinAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
-  spinOsc = spinAudioCtx.createOscillator();
-  spinGain = spinAudioCtx.createGain();
-  spinLfo = spinAudioCtx.createOscillator();
-  spinLfoGain = spinAudioCtx.createGain();
-
-  spinOsc.frequency.value = 120;
-  spinLfo.frequency.value = 9;
-  spinLfoGain.gain.value = 25;
-  spinGain.gain.value = 0.025;
-
-  spinLfo.connect(spinLfoGain);
-  spinLfoGain.connect(spinOsc.frequency);
-  spinOsc.connect(spinGain);
-  spinGain.connect(spinAudioCtx.destination);
-
-  spinOsc.start();
-  spinLfo.start();
-}
-
-function stopSpinSound(){
-  if(!spinAudioCtx) return;
-
-  spinGain.gain.setTargetAtTime(
-    0, spinAudioCtx.currentTime, 0.05
-  );
-
-  spinOsc.stop(spinAudioCtx.currentTime + 0.2);
-  spinLfo.stop(spinAudioCtx.currentTime + 0.2);
-
-  setTimeout(()=>{
-    spinAudioCtx.close();
-  },300);
-  }
-if(spinning)return;
-spinning=true
-  startSpinSound();
-const btn=document.getElementById("spin");
-const wheel=document.getElementById("wheel");
-const result=document.getElementById("result");
-
-btn.disabled=true;
-result.textContent="✨ Spinning...";
-
-const index=Math.floor(Math.random()*prizes.length);
-const prize=prizes[index];
-const angle=360-index*60-30;
-
-rotation+=1800+angle-(rotation%360);
-wheel.style.transform="rotate("+rotation+"deg)";
-
-setTimeout(()=>{
-stopSpinSound();
-total+=prize;
-document.getElementById("coins").textContent=total;
-  document.getElementById("coinBalance").textContent=total+" Coins";
-result.textContent="🎉 Congratulations! You won "+prize+" coins! 💜";
-btn.disabled=false;
-spinning=false;
-},5100);
-}
-</script>
-  <!-- YOUR LUCK LOGIN / REGISTER -->
-<div id="authBox" style="background:#17172b;color:white;padding:20px;border-radius:15px;text-align:center;margin:20px 0;">
-  <h2>🍀 Your Luck</h2>
-  <h3>Create Account / Login</h3>
-
-  <input id="mobile" type="tel" placeholder="Mobile Number"
-    maxlength="10" style="padding:12px;width:90%;margin:8px;border-radius:8px;">
-
-  <input id="otp" type="text" placeholder="Enter OTP"
-    style="padding:12px;width:90%;margin:8px;border-radius:8px;">
-
-  <button onclick="sendOTP()">Send OTP</button>
-  <div id="recaptcha-container"></div>
-  <button onclick="verifyOTP()">Verify OTP</button>
-
-  <input id="password" type="password" placeholder="Create Password"
-    style="padding:12px;width:90%;margin:8px;border-radius:8px;">
-
-  <button onclick="registerUser()">Register</button>
-  <p id="authMessage"></p>
+<p class="note">
+Virtual coin demo only. No real money or cash prizes.
+</p>
 </div>
-  <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyBicVV0lgCfC_WbjZR0LJ0hixXDPq56dj8",
-    authDomain: "your-luck-82ad2.firebaseapp.com",
-    projectId: "your-luck-82ad2",
-    storageBucket: "your-luck-82ad2.firebasestorage.app",
-    messagingSenderId: "979385333086",
-    appId: "1:979385333086:web:f7467e5775ae070e6f4bcf",
-    measurementId: "G-71H8LR9381"
-  };
+<script type="module">
+import {initializeApp}
+from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-    import {
-  getAuth,
-  RecaptchaVerifier,
-  signInWithPhoneNumber
+import {
+ getAuth,RecaptchaVerifier,signInWithPhoneNumber,
+ onAuthStateChanged,signOut
 } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
 
+const firebaseConfig = {
+ apiKey: "AIzaSyBicVV0lgCfC_WbjZRBLJ0hixXDPq56dj8",
+ authDomain: "your-luck-82ad2.firebaseapp.com",
+ projectId: "your-luck-82ad2",
+ storageBucket: "your-luck-82ad2.firebasestorage.app",
+ messagingSenderId: "979385333086",
+ appId: "1:979385333086:web:f7467e5775ae070e6f4bcf",
+ measurementId: "G-71H8LR9381"
+};
+
+const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-    auth.languageCode = "en";
-    window.sendOTP = async function() {
-      window.verifyOTP = async function() {
-        window.registerUser = async function() {
-  const message = document.getElementById("authMessage");
-  const user = auth.currentUser;
 
-  if (!user || !user.phoneNumber) {
-    message.textContent = "Pehle mobile OTP verify karo.";
-    return;
+let confirmationResult = null;
+let recaptchaVerifier = null;
+
+const message = document.getElementById("authMessage");
+
+window.sendOTP = async function(){
+ const mobile = document.getElementById("mobile").value.trim();
+
+ if(!/^[6-9]\d{9}$/.test(mobile)){
+  message.textContent = "Sahi 10 digit mobile number dalo.";
+  return;
+ }
+
+ try{
+  message.textContent = "OTP bheja ja raha hai...";
+  document.getElementById("sendButton").disabled = true;
+
+  if(recaptchaVerifier){
+   recaptchaVerifier.clear();
   }
 
-  const password = document.getElementById("password").value;
+  recaptchaVerifier = new RecaptchaVerifier(
+   auth,"recaptcha-container",{size:"normal"}
+  );
 
-  if (password.length < 6) {
-    message.textContent = "Password kam se kam 6 characters ka rakho.";
-    return;
-  }
+  await recaptchaVerifier.render();
 
-  message.textContent = "Mobile verify ho gaya. Account registration ka agla step baaki hai.";
+  confirmationResult = await signInWithPhoneNumber(
+   auth,"+91"+mobile,recaptchaVerifier
+  );
+
+  message.textContent = "OTP bhej diya gaya hai.";
+ }catch(error){
+  message.textContent = "OTP error: "+error.message;
+  document.getElementById("sendButton").disabled = false;
+ }
 };
-  const otp = document.getElementById("otp").value.trim();
-  const message = document.getElementById("authMessage");
 
-  if (!window.confirmationResult) {
-    message.textContent = "Pehle Send OTP dabao.";
-    return;
-  }
+window.verifyOTP = async function(){
+ const otp = document.getElementById("otp").value.trim();
 
-  try {
-    await window.confirmationResult.confirm(otp);
-    message.textContent = "Mobile number verify ho gaya!";
-  } catch (error) {
-    message.textContent = "OTP galat hai ya expire ho gaya.";
-  }
+ if(!confirmationResult){
+  message.textContent = "Pehle Send OTP dabao.";
+  return;
+ }
+
+ if(!otp){
+  message.textContent = "OTP dalo.";
+  return;
+ }
+
+ try{
+  await confirmationResult.confirm(otp);
+  message.textContent = "Mobile verify ho gaya!";
+ }catch(error){
+  message.textContent = "OTP galat hai ya expire ho gaya.";
+ }
 };
-  const mobile = document.getElementById("mobile").value.trim();
-  const message = document.getElementById("authMessage");
 
-  if (!/^[6-9]\d{9}$/.test(mobile)) {
-    message.textContent = "Sahi 10 digit mobile number dalo.";
-    return;
-  }
+onAuthStateChanged(auth,(user)=>{
+ const authBox = document.getElementById("authBox");
+ const gameBox = document.getElementById("gameBox");
 
-  try {
-    window.recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha-container", {});
-    const confirmation = await signInWithPhoneNumber(
-      auth,
-      "+91" + mobile,
-      window.recaptchaVerifier
-    );
-    window.confirmationResult = confirmation;
-    message.textContent = "OTP bhej diya gaya hai.";
-  } catch (error) {
-    message.textContent = error.message;
-  }
+ if(user){
+  authBox.classList.add("hidden");
+  gameBox.classList.remove("hidden");
+  loadWallet(user.uid);
+ }else{
+  authBox.classList.remove("hidden");
+  gameBox.classList.add("hidden");
+ }
+});
+
+window.logout = async function(){
+ await signOut(auth);
 };
-  </script>
+
+let total = 0;
+let rotation = 0;
+let spinning = false;
+const prizes = [10,20,30,50,100,500];
+
+function loadWallet(uid){
+ total = Number(localStorage.getItem("yourLuckCoins_"+uid)) || 0;
+ updateWallet();
+}
+
+function updateWallet(){
+ document.getElementById("coins").textContent = total;
+ document.getElementById("coinBalance").textContent = total+" Coins";
+
+ const user = auth.currentUser;
+ if(user){
+  localStorage.setItem("yourLuckCoins_"+user.uid,String(total));
+ }
+}
+
+function winSound(){
+ try{
+  const audio = new AudioContext();
+  [523,659,784,1046].forEach((freq,i)=>{
+   const oscillator = audio.createOscillator();
+   const gain = audio.createGain();
+   oscillator.frequency.value = freq;
+   oscillator.connect(gain);
+   gain.connect(audio.destination);
+   gain.gain.setValueAtTime(.12,audio.currentTime+i*.12);
+   gain.gain.exponentialRampToValueAtTime(
+    .001,audio.currentTime+i*.12+.2
+   );
+   oscillator.start(audio.currentTime+i*.12);
+   oscillator.stop(audio.currentTime+i*.12+.2);
+  });
+ }catch(e){}
+}
+
+function showWin(){
+ winSound();
+ const popup = document.createElement("div");
+ popup.style.cssText =
+ "position:fixed;top:35%;left:10%;width:80%;padding:25px;background:linear-gradient(135deg,#ff69b4,#8a2be2);color:white;border-radius:20px;font-size:22px;z-index:9999";
+ popup.innerHTML = "🎉 CONGRATULATIONS! 🎉<br>🏆 YOU WON!";
+ document.body.appendChild(popup);
+ setTimeout(()=>popup.remove(),2500);
+}
+
+window.spinWheel = function(){
+ if(!auth.currentUser){
+  document.getElementById("result").textContent =
+   "Pehle login karo!";
+  return;
+ }
+ if(spinning)return;
+
+ spinning = true;
+
+ const btn = document.getElementById("spin");
+ const wheel = document.getElementById("wheel");
+ const result = document.getElementById("result");
+
+ btn.disabled = true;
+ result.textContent = "✨ Spinning...";
+
+ const index = Math.floor(Math.random()*prizes.length);
+ const prize = prizes[index];
+ const angle = 360-index*60-30;
+
+ rotation += 1800+angle-(rotation%360);
+ wheel.style.transform = "rotate("+rotation+"deg)";
+
+ setTimeout(()=>{
+  total += prize;
+  updateWallet();
+  result.textContent =
+   "🎉 Congratulations! You won "+prize+" coins! 💜";
+  showWin();
+  btn.disabled = false;
+  spinning = false;
+ },5100);
+};
+</script>
+
 </body>
 </html>
