@@ -283,6 +283,7 @@ rotation+=1800+angle-(rotation%360);
 wheel.style.transform="rotate("+rotation+"deg)";
 
 setTimeout(()=>{
+stopSpinSound();
 total+=prize;
 document.getElementById("coins").textContent=total;
 result.textContent="🎉 Congratulations! You won "+prize+" coins! 💜";
