@@ -7,6 +7,36 @@
 <style>
 *{box-sizing:border-box}
 body{
+  <div id="wallet" style="background:#17172b;color:white;padding:20px;border-radius:15px;text-align:center;margin:20px 0;">
+  <h2>🪙 Your Luck Wallet</h2>
+  <h1 id="coinBalance">0 Coins</h1>
+  <p>Total Coin Supply: 500000</p>
+  <button onclick="dailyBonus()">Daily Bonus</button>
+  <p id="bonusMessage"></p>
+</div>
+
+<script>
+let coins = Number(localStorage.getItem("yourLuckCoins")) || 0;
+
+function updateWallet() {
+  document.getElementById("coinBalance").innerText = coins + " Coins";
+  localStorage.setItem("yourLuckCoins", coins);
+}
+
+function dailyBonus() {
+  let today = new Date().toDateString();
+  if (localStorage.getItem("bonusDate") === today) {
+    document.getElementById("bonusMessage").innerText = "Bonus already claimed!";
+    return;
+  }
+  coins += 50;
+  localStorage.setItem("bonusDate", today);
+  updateWallet();
+  document.getElementById("bonusMessage").innerText = "50 Coins Added!";
+}
+
+updateWallet();
+</script>
 margin:0;
 font-family:Arial,sans-serif;
 background:linear-gradient(135deg,#ffe4f4,#e8d5ff);
