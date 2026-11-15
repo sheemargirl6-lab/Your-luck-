@@ -322,5 +322,25 @@ spinning=false;
 },5100);
 }
 </script>
+  <!-- YOUR LUCK LOGIN / REGISTER -->
+<div id="authBox" style="background:#17172b;color:white;padding:20px;border-radius:15px;text-align:center;margin:20px 0;">
+  <h2>🍀 Your Luck</h2>
+  <h3>Create Account / Login</h3>
+
+  <input id="mobile" type="tel" placeholder="Mobile Number"
+    maxlength="10" style="padding:12px;width:90%;margin:8px;border-radius:8px;">
+
+  <input id="otp" type="text" placeholder="Enter OTP"
+    style="padding:12px;width:90%;margin:8px;border-radius:8px;">
+
+  <button onclick="sendOTP()">Send OTP</button>
+  <button onclick="verifyOTP()">Verify OTP</button>
+
+  <input id="password" type="password" placeholder="Create Password"
+    style="padding:12px;width:90%;margin:8px;border-radius:8px;">
+
+  <button onclick="registerUser()">Register</button>
+  <p id="authMessage"></p>
+</div>
 </body>
 </html>
