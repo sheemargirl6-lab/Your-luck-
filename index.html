@@ -291,6 +291,7 @@ setTimeout(()=>{
 stopSpinSound();
 total+=prize;
 document.getElementById("coins").textContent=total;
+  document.getElementById("coinBalance").textContent=total+" Coins";
 result.textContent="🎉 Congratulations! You won "+prize+" coins! 💜";
 btn.disabled=false;
 spinning=false;
