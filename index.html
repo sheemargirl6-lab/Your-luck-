@@ -1,207 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>YOUR LUCK</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Luck - Lucky Spin</title>
 <style>
-body {
-  margin:0;
-  background:#101010;
-  color:white;
-  font-family:Arial,sans-serif;
+*{box-sizing:border-box}
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:linear-gradient(135deg,#ffe4f4,#e8d5ff);
+color:#55216c;
+text-align:center;
+min-height:100vh;
+padding:20px;
 }
-header {
-  background:#191919;
-  padding:22px;
-  text-align:center;
-  border-bottom:2px solid gold;
+.container{
+max-width:450px;
+margin:25px auto;
+background:white;
+padding:25px 18px;
+border-radius:25px;
+box-shadow:0 10px 35px #a65bb555;
 }
-h1 {color:gold;margin:0;}
-.balance {
-  background:#242424;
-  margin:18px;
-  padding:20px;
-  border-radius:12px;
-  text-align:center;
+h1{color:#c02b91;margin:5px}
+.subtitle{color:#8550a4}
+.coins{
+background:#fff0fa;
+padding:12px;
+border-radius:15px;
+font-size:21px;
+font-weight:bold;
+margin:20px 0;
 }
-.balance h2 {color:gold;}
-.games {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
-  padding:15px;
+.wheel-wrap{
+width:min(300px,80vw);
+height:min(300px,80vw);
+margin:25px auto;
+position:relative;
 }
-.game {
-  background:#222;
-  border:1px solid #555;
-  border-radius:14px;
-  padding:24px 10px;
-  text-align:center;
+.pointer{
+position:absolute;
+top:-13px;
+left:50%;
+transform:translateX(-50%);
+z-index:2;
+font-size:35px;
+color:#9d36bd;
 }
-.game button {
-  background:gold;
-  color:black;
-  border:0;
-  padding:11px 20px;
-  border-radius:7px;
-  font-weight:bold;
+#wheel{
+width:100%;
+height:100%;
+border-radius:50%;
+border:8px solid white;
+box-shadow:0 4px 20px #9146aa66;
+background:conic-gradient(
+#ff69b4 0deg 60deg,
+#9b59b6 60deg 120deg,
+#ffb6d9 120deg 180deg,
+#7d3c98 180deg 240deg,
+#ff69b4 240deg 300deg,
+#c39bd3 300deg 360deg);
+transition:transform 5s cubic-bezier(.15,.7,.1,1);
+position:relative;
 }
-#result {
-  text-align:center;
-  color:#00ff99;
-  font-size:20px;
-  padding:15px;
+.labels{
+position:absolute;
+inset:0;
+border-radius:50%;
+pointer-events:none;
 }
-footer {
-  text-align:center;
-  padding:20px;
-  color:#aaa;
+.labels span{
+position:absolute;
+left:50%;
+top:50%;
+width:65px;
+margin-left:-32px;
+margin-top:-12px;
+font-size:17px;
+font-weight:bold;
+color:white;
+text-shadow:1px 1px 3px #633;
 }
+.labels span:nth-child(1){transform:rotate(30deg) translateY(-100px) rotate(-30deg)}
+.labels span:nth-child(2){transform:rotate(90deg) translateY(-100px) rotate(-90deg)}
+.labels span:nth-child(3){transform:rotate(150deg) translateY(-100px) rotate(-150deg)}
+.labels span:nth-child(4){transform:rotate(210deg) translateY(-100px) rotate(-210deg)}
+.labels span:nth-child(5){transform:rotate(270deg) translateY(-100px) rotate(-270deg)}
+.labels span:nth-child(6){transform:rotate(330deg) translateY(-100px) rotate(-330deg)}
+button{
+border:0;
+padding:15px 35px;
+border-radius:30px;
+background:linear-gradient(90deg,#ec4899,#9333ea);
+color:white;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
+box-shadow:0 5px 15px #b65bc566;
+}
+button:disabled{opacity:.6}
+#result{
+font-size:23px;
+font-weight:bold;
+margin:22px 0;
+min-height:30px;
+color:#a0269b;
+}
+.note{font-size:12px;color:#888;margin-top:20px}
 </style>
 </head>
 <body>
+<div class="container">
+<h1>💜 Your-Luck 💜</h1>
+<p class="subtitle">✨ Lucky Spin Gaming Platform ✨</p>
 
-<header>
-<h1>🍀 YOUR LUCK</h1>
-<p>PLAY GAMES • TEST YOUR LUCK</p>
-</header>
+<div class="coins">🪙 Virtual Coins: <span id="coins">0</span></div>
 
-<div class="balance">
-<h3>YOUR VIRTUAL COINS</h3>
-<h2 id="coins">1000 🪙</h2>
+<div class="wheel-wrap">
+<div class="pointer">▼</div>
+<div id="wheel">
+<div class="labels">
+<span>10</span><span>20</span><span>30</span>
+<span>50</span><span>100</span><span>500</span>
+</div>
+</div>
 </div>
 
-<h2 style="text-align:center">🎮 ALL GAMES</h2>
-
-<div class="games">
-
-<div class="game">
-<h2>✈️ Aviator</h2>
-<p>Crash Simulator</p>
-<button onclick="aviator()">Play</button>
+<button id="spin" onclick="spinWheel()">🎡 SPIN NOW</button>
+<div id="result">Good Luck! ❤️</div>
+<p class="note">This is a virtual coin demo game. No real money or prizes.</p>
 </div>
-
-<div class="game">
-<h2>🎡 Lucky Spin</h2>
-<p>Spin the wheel</p>
-<button onclick="spin()">Play</button>
-</div>
-
-<div class="game">
-<h2>🎲 Lucky Dice</h2>
-<p>Roll the dice</p>
-<button onclick="dice()">Play</button>
-</div>
-
-<div class="game">
-<h2>🃏 Memory Game</h2>
-<p>Test your memory</p>
-<button onclick="memory()">Play</button>
-</div>
-
-<div class="game">
-<h2>🧩 Lucky Quiz</h2>
-<p>Test your knowledge</p>
-<button onclick="quiz()">Play</button>
-</div>
-
-<div class="game">
-<h2>🎯 Number Game</h2>
-<p>Guess the number</p>
-<button onclick="numberGame()">Play</button>
-</div>
-
-</div>
-
-<div id="result">Welcome to YOUR LUCK! 🍀</div>
-
-<footer>
-<p>YOUR LUCK © 2026</p>
-<p>Free games • Virtual coins only</p>
-</footer>
 
 <script>
-let coins=1000;
+let total=0;
+let rotation=0;
+let spinning=false;
+const prizes=[10,20,30,50,100,500];
 
-function update(){
-document.getElementById("coins").innerText=coins+" 🪙";
+function spinWheel(){
+if(spinning)return;
+spinning=true;
+const btn=document.getElementById("spin");
+const wheel=document.getElementById("wheel");
+const result=document.getElementById("result");
+
+btn.disabled=true;
+result.textContent="✨ Spinning...";
+
+const index=Math.floor(Math.random()*prizes.length);
+const prize=prizes[index];
+const angle=360-index*60-30;
+
+rotation+=1800+angle-(rotation%360);
+wheel.style.transform="rotate("+rotation+"deg)";
+
+setTimeout(()=>{
+total+=prize;
+document.getElementById("coins").textContent=total;
+result.textContent="🎉 Congratulations! You won "+prize+" coins! 💜";
+btn.disabled=false;
+spinning=false;
+},5100);
 }
-
-function reward(){
-coins+=10;
-update();
-}
-
-function aviator(){
-let x=(1+Math.random()*4).toFixed(2);
-document.getElementById("result").innerText=
-"✈️ Demo flight ended at "+x+"x";
-reward();
-}
-
-function spin(){
-let prizes=[10,20,30,50,100];
-let p=prizes[Math.floor(Math.random()*prizes.length)];
-coins+=p;
-update();
-document.getElementById("result").innerText=
-"🎡 You won "+p+" virtual coins!";
-}
-
-function dice(){
-let n=Math.floor(Math.random()*6)+1;
-document.getElementById("result").innerText=
-"🎲 Your dice number: "+n;
-reward();
-}
-
-function memory(){
-let a=["🍎","🍋","🍇","🍎","🍋","🍇"];
-a.sort(()=>Math.random()-0.5);
-document.getElementById("result").innerText=
-"🧠 Remember: "+a.join(" ");
-}
-
-function quiz(){
-let ans=prompt("How many days are there in a week?");
-if(ans==="7"){
-reward();
-document.getElementById("result").innerText="Correct! +10 coins 🎉";
-}else{
-document.getElementById("result").innerText="Try again!";
-}
-}
-
-function numberGame(){
-let n=Math.floor(Math.random()*10)+1;
-let g=prompt("Guess a number between 1 and 10");
-document.getElementById("result").innerText=
-Number(g)===n?"Correct! Number was "+n:"Number was "+n+". Try again!";
-if(Number(g)===n) reward();
-}
-</script>
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyBicVV0lgCfC_WbjZR0LJ0hixXDPq56dj8",
-    authDomain: "your-luck-82ad2.firebaseapp.com",
-    projectId: "your-luck-82ad2",
-    storageBucket: "your-luck-82ad2.firebasestorage.app",
-    messagingSenderId: "979385333086",
-    appId: "1:979385333086:web:4233924ebfec9ac56f4bcf",
-    measurementId: "G-G42E3WM5FB"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
 </script>
 </body>
 </html>
