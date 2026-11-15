@@ -227,8 +227,47 @@ let spinning=false;
 const prizes=[10,20,30,50,100,500];
 
 function spinWheel(){
+  let spinAudioCtx, spinOsc, spinGain, spinLfo, spinLfoGain;
+
+function startSpinSound(){
+  spinAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+  spinOsc = spinAudioCtx.createOscillator();
+  spinGain = spinAudioCtx.createGain();
+  spinLfo = spinAudioCtx.createOscillator();
+  spinLfoGain = spinAudioCtx.createGain();
+
+  spinOsc.frequency.value = 120;
+  spinLfo.frequency.value = 9;
+  spinLfoGain.gain.value = 25;
+  spinGain.gain.value = 0.025;
+
+  spinLfo.connect(spinLfoGain);
+  spinLfoGain.connect(spinOsc.frequency);
+  spinOsc.connect(spinGain);
+  spinGain.connect(spinAudioCtx.destination);
+
+  spinOsc.start();
+  spinLfo.start();
+}
+
+function stopSpinSound(){
+  if(!spinAudioCtx) return;
+
+  spinGain.gain.setTargetAtTime(
+    0, spinAudioCtx.currentTime, 0.05
+  );
+
+  spinOsc.stop(spinAudioCtx.currentTime + 0.2);
+  spinLfo.stop(spinAudioCtx.currentTime + 0.2);
+
+  setTimeout(()=>{
+    spinAudioCtx.close();
+  },300);
+  }
 if(spinning)return;
-spinning=true;
+spinning=true
+  startSpinSound();
 const btn=document.getElementById("spin");
 const wheel=document.getElementById("wheel");
 const result=document.getElementById("result");
