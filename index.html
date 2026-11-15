@@ -133,6 +133,94 @@ color:#a0269b;
 </div>
 
 <script>
+  // 🎉 YOUR LUCK WINNING EFFECTS
+
+const style = document.createElement("style");
+style.textContent = `
+.win-popup {
+  position:fixed;
+  top:35%;
+  left:10%;
+  width:80%;
+  padding:25px 10px;
+  background:linear-gradient(135deg,#ff69b4,#8a2be2);
+  color:white;
+  text-align:center;
+  border-radius:20px;
+  font-size:22px;
+  z-index:9999;
+  box-shadow:0 0 30px pink;
+  animation:pop .5s ease;
+}
+@keyframes pop {
+  from {transform:scale(.2);opacity:0}
+  to {transform:scale(1);opacity:1}
+}
+.confetti {
+  position:fixed;
+  top:-20px;
+  z-index:9998;
+  font-size:25px;
+  pointer-events:none;
+  animation:fall 2.5s linear forwards;
+}
+@keyframes fall {
+  to {transform:translateY(110vh) rotate(720deg);opacity:0}
+}
+`;
+document.head.appendChild(style);
+
+function winSound() {
+  try {
+    const audio = new AudioContext();
+    [523,659,784,1046].forEach((freq,i)=>{
+      const oscillator=audio.createOscillator();
+      const gain=audio.createGain();
+      oscillator.frequency.value=freq;
+      oscillator.connect(gain);
+      gain.connect(audio.destination);
+      gain.gain.setValueAtTime(.12,audio.currentTime+i*.12);
+      gain.gain.exponentialRampToValueAtTime(
+        .001,audio.currentTime+i*.12+.2
+      );
+      oscillator.start(audio.currentTime+i*.12);
+      oscillator.stop(audio.currentTime+i*.12+.2);
+    });
+  } catch(e) {}
+}
+
+function showWin() {
+  winSound();
+
+  const popup=document.createElement("div");
+  popup.className="win-popup";
+  popup.innerHTML="🎉 CONGRATULATIONS! 🎉<br>🏆 YOU WON!";
+
+  document.body.appendChild(popup);
+
+  for(let i=0;i<35;i++){
+    const c=document.createElement("div");
+    c.className="confetti";
+    c.innerText=["🎊","✨","💖","🌟"][Math.floor(Math.random()*4)];
+    c.style.left=Math.random()*100+"vw";
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),2500);
+  }
+
+  setTimeout(()=>popup.remove(),2500);
+}
+
+const resultBox=document.getElementById("result");
+
+if(resultBox){
+  const observer=new MutationObserver(()=>{
+    if(/won|जीते| जीत/i.test(resultBox.innerText)){
+      showWin();
+    }
+  });
+  observer.observe(resultBox,{childList:true,characterData:true,subtree:true});
+  }
+  
 let total=0;
 let rotation=0;
 let spinning=false;
