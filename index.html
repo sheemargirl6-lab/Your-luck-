@@ -290,6 +290,10 @@ window.spinWheel = function(){
 
  const btn = document.getElementById("spin");
  const wheel = document.getElementById("wheel");
+ if (!wheel) {
+ alert("Wheel nahi mila!");
+ return;
+}
  const result = document.getElementById("result");
 
  btn.disabled = true;
