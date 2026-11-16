@@ -307,6 +307,19 @@ window.spinWheel = function(){
 
  const index = Math.floor(Math.random()*prizes.length);
  const prize = prizes[index];
+ const history = JSON.parse(
+ localStorage.getItem("spinHistory_"+auth.currentUser.uid) || "[]"
+);
+
+history.unshift({
+ prize: prize,
+ date: new Date().toLocaleString("en-IN")
+});
+
+localStorage.setItem(
+ "spinHistory_"+auth.currentUser.uid,
+ JSON.stringify(history.slice(0,50))
+);
  const angle = 360-index*60-30;
 
  rotation += 1800+angle-(rotation%360);
@@ -318,10 +331,30 @@ window.spinWheel = function(){
   result.textContent =
    "🎉 Congratulations! You won "+prize+" coins! 💜";
   showWin();
+  showSpinHistory();
   btn.disabled = false;
   spinning = false;
  },5100);
 };
+ function showSpinHistory(){
+ const user = auth.currentUser;
+ const box = document.getElementById("spinHistory");
+
+ if(!user || !box) return;
+
+ const history = JSON.parse(
+  localStorage.getItem("spinHistory_"+user.uid) || "[]"
+ );
+
+ if(history.length === 0){
+  box.textContent = "Abhi koi spin history nahi hai.";
+  return;
+ }
+
+ box.innerHTML = history.map(item =>
+  `<p>🎁 ${item.prize} Coins — ${item.date}</p>`
+ ).join("");
+}
 </script>
 
 </body>
