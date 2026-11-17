@@ -3,401 +3,389 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YOUR LUCK - Lucky Gaming</title>
+<title>Your Luck - Play & Win</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;padding:0 0 80px;font-family:Arial;color:white;background:linear-gradient(145deg,#21083f,#4b167c 55%,#19062f);min-height:100vh}
+:root{--purple:#35105f;--violet:#7626b8;--gold:#ffd66b;--pink:#ed69bd}
+body{margin:0;padding:0 0 78px;font-family:Arial,sans-serif;color:#fff;background:linear-gradient(145deg,#21083f,#4b167c 55%,#19062f);min-height:100vh}
 header{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:#22083fee;border-bottom:1px solid #f8d77b66;position:sticky;top:0;z-index:5}
-.brand{font-size:19px;font-weight:900;color:#ffe18a}
-.brand small{display:block;font-size:10px;letter-spacing:2px;color:white}
-.wallet{background:linear-gradient(110deg,#ffe9a2,#e9a83d);color:#4b2168;padding:9px 13px;border-radius:20px;font-weight:800}
+.brand{font-size:19px;font-weight:900;color:#ffe18a;text-shadow:0 2px 8px #ffb52b}
+.brand small{display:block;font-size:10px;letter-spacing:2px;color:#fff}
+.wallet{background:linear-gradient(110deg,#ffe9a2,#e9a83d);color:#4b2168;padding:9px 13px;border-radius:20px;font-weight:800;box-shadow:0 3px 12px #0005}
 main{max-width:520px;margin:auto;padding:14px}
 .panel{background:linear-gradient(145deg,#5a2388,#30104f);border:1px solid #eac76d88;border-radius:20px;padding:16px;margin:12px 0;box-shadow:0 8px 22px #09001888}
 h1,h2,p{margin-top:5px}
 .hero{text-align:center;padding:20px 12px;background:radial-gradient(circle at top,#a64ed0,#4b167a 65%,#2c0d4b)}
-.hero h1{font-size:25px;color:#ffe18a}
+.hero h1{font-size:25px;color:#ffe18a;margin:5px}
+.hero p{color:#f9eaff}
 .crown{font-size:32px}
+#authBox{max-width:440px;margin:28px auto;text-align:center}
 input{display:block;width:100%;padding:13px;margin:10px 0;border-radius:10px;border:1px solid #d9b8ef;font-size:16px}
-button{border:0;border-radius:25px;padding:12px 18px;font-size:14px;font-weight:800;color:#40125e;background:linear-gradient(100deg,#ffe79b,#eeb84b);cursor:pointer;margin:4px}
-button:disabled{opacity:.5}
-.pinkbtn{background:linear-gradient(100deg,#ff9bd6,#e7b0ff)}
+button{border:0;border-radius:25px;padding:13px 20px;font-size:15px;font-weight:800;color:#40125e;background:linear-gradient(100deg,#ffe79b,#eeb84b);box-shadow:0 4px 12px #16002788;cursor:pointer}
+button:disabled{opacity:.55}
+.pinkbtn{background:linear-gradient(100deg,#ff9bd6,#e7b0ff);color:#481260}
 .hidden{display:none!important}
-#recaptcha-container{margin:8px auto;display:flex;justify-content:center}
-#authMessage{font-size:13px;color:#ffe7a0;min-height:20px}
+#recaptcha-container{margin:8px auto;display:flex;justify-content:center;min-height:0}
+#authMessage{font-size:13px;color:#ffe7a0;min-height:20px;overflow-wrap:anywhere}
 .wheel-panel{text-align:center}
 .wheel-wrap{width:min(280px,76vw);height:min(280px,76vw);margin:20px auto;position:relative}
-#wheel{width:100%;height:100%;border-radius:50%;border:8px solid #ffe6a0;box-shadow:0 0 0 5px #8d4ab0;background:conic-gradient(#f3b84e 0 60deg,#8438b5 60deg 120deg,#f3b84e 120deg 180deg,#8438b5 180deg 240deg,#f3b84e 240deg 300deg,#8438b5 300deg 360deg);transition:transform 5s cubic-bezier(.15,.7,.1,1)}
-.labels{position:absolute;inset:0}
-.labels span{position:absolute;left:50%;top:50%;font-weight:900;font-size:17px}
-.labels span:nth-child(1){transform:translate(-50%,-85px)}
-.labels span:nth-child(2){transform:translate(30px,-45px)}
-.labels span:nth-child(3){transform:translate(30px,25px)}
-.labels span:nth-child(4){transform:translate(-50%,65px)}
-.labels span:nth-child(5){transform:translate(-85px,25px)}
-.labels span:nth-child(6){transform:translate(-85px,-45px)}
-.pointer{position:absolute;z-index:2;top:-17px;left:50%;transform:translateX(-50%);font-size:32px}
+#wheel{width:100%;height:100%;border-radius:50%;border:8px solid #ffe6a0;box-shadow:0 0 0 5px #8d4ab0,0 8px 25px #10001d;background:conic-gradient(#f3b84e 0 60deg,#8438b5 60deg 120deg,#f3b84e 120deg 180deg,#8438b5 180deg 240deg,#f3b84e 240deg 300deg,#8438b5 300deg 360deg);transition:transform 5s cubic-bezier(.15,.7,.1,1);position:relative}
+.labels{position:absolute;inset:0;pointer-events:none}
+.labels span{position:absolute;left:50%;top:50%;width:55px;margin-left:-27px;margin-top:-10px;font-weight:900;font-size:17px;color:#fff;text-shadow:0 2px 3px #301044}
+.labels span:nth-child(1){transform:rotate(30deg) translateY(-92px) rotate(-30deg)}
+.labels span:nth-child(2){transform:rotate(90deg) translateY(-92px) rotate(-90deg)}
+.labels span:nth-child(3){transform:rotate(150deg) translateY(-92px) rotate(-150deg)}
+.labels span:nth-child(4){transform:rotate(210deg) translateY(-92px) rotate(-210deg)}
+.labels span:nth-child(5){transform:rotate(270deg) translateY(-92px) rotate(-270deg)}
+.labels span:nth-child(6){transform:rotate(330deg) translateY(-92px) rotate(-330deg)}
+.pointer{position:absolute;z-index:2;top:-17px;left:50%;transform:translateX(-50%);font-size:32px;color:#fff}
 #result{min-height:26px;font-weight:800;color:#ffe18a;margin:12px}
-.section-title{display:flex;justify-content:space-between;color:#ffe18a;margin:22px 2px 10px}
+.section-title{display:flex;align-items:center;justify-content:space-between;color:#ffe18a;margin:22px 2px 10px}
 .games{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.game{background:linear-gradient(145deg,#6e2c9c,#351052);border:1px solid #e9c56b88;border-radius:16px;padding:14px 8px;text-align:center;min-height:112px;cursor:pointer}
+.game{background:linear-gradient(145deg,#6e2c9c,#351052);border:1px solid #e9c56b88;border-radius:16px;padding:14px 8px;text-align:center;min-height:112px}
 .game .emoji{font-size:30px;display:block;margin-bottom:7px}
 .game b{font-size:14px}
 .game small{display:block;color:#e8d7f5;margin-top:5px;font-size:10px}
-.game:active{transform:scale(.97)}
 .history-item{font-size:13px;border-bottom:1px solid #ffffff22;padding:8px 0}
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:space-around;background:#21083ff2;border-top:1px solid #f3d27b88;padding:9px 2px calc(9px + env(safe-area-inset-bottom));z-index:8}
 .bottom-nav button{background:transparent;color:#f6e8ff;box-shadow:none;padding:5px 8px;font-size:11px}
 .bottom-nav span{display:block;font-size:19px;margin-bottom:3px}
 .note{text-align:center;color:#d8c4e8;font-size:10px;margin:18px 0}
-#gameContent{min-height:150px;text-align:center;padding:12px 0}
-.coin-info{color:#ffe18a;font-weight:bold}
 </style>
 </head>
 <body>
 
 <header>
-<div class="brand">👑 YOUR LUCK <small>LUCKY GAMING</small></div>
-<div class="wallet">🪙 <span id="topCoins">0</span></div>
+  <div class="brand">👑 YOUR LUCK <small>LUCKY GAMING</small></div>
+  <div class="wallet">🪙 <span id="topCoins">0</span></div>
 </header>
 
 <main>
-<section id="authBox" class="panel">
-<div class="crown">👑</div>
-<h2 style="color:#ffe18a">Welcome to Your Luck</h2>
-<p>Mobile number se login karein</p>
-<input id="mobile" type="tel" maxlength="10" placeholder="10 digit mobile number">
-<div id="recaptcha-container"></div>
-<button id="sendButton" class="pinkbtn" onclick="sendOTP()">SEND OTP</button>
-<input id="otp" type="text" inputmode="numeric" placeholder="OTP enter karein">
-<button onclick="verifyOTP()">VERIFY OTP</button>
-<p id="authMessage">Apna mobile number enter karein.</p>
-</section>
+  <section id="authBox" class="panel">
+    <div class="crown">👑</div>
+    <h2 style="color:#ffe18a">Welcome to Your Luck</h2>
+    <p>Mobile number se login karein</p>
+    <input id="mobile" type="tel" maxlength="10" inputmode="numeric" placeholder="10 digit mobile number">
+    <div id="recaptcha-container"></div>
+    <button id="sendButton" class="pinkbtn" type="button">SEND OTP</button>
+    <input id="otp" type="text" inputmode="numeric" maxlength="6" placeholder="OTP enter karein">
+    <button id="verifyButton" type="button">VERIFY OTP</button>
+    <p id="authMessage">Apna mobile number enter karein.</p>
+  </section>
 
-<div id="gameBox" class="hidden">
+  <div id="gameBox" class="hidden">
+    <section class="panel hero">
+      <div class="crown">👑</div>
+      <h1>SPIN & WIN BIG REWARDS!</h1>
+      <p>Play for fun • Collect virtual coins</p>
+    </section>
 
-<section class="panel hero">
-<div class="crown">👑</div>
-<h1>SPIN & WIN BIG REWARDS!</h1>
-<p>Play for fun • Collect virtual coins</p>
-</section>
+    <section class="panel wheel-panel">
+      <h2 style="color:#ffe18a">🎡 Lucky Spin</h2>
+      <p>Try your luck and win virtual coins</p>
+      <div class="wheel-wrap">
+        <div class="pointer">▼</div>
+        <div id="wheel"><div class="labels"><span>10</span><span>20</span><span>30</span><span>50</span><span>100</span><span>500</span></div></div>
+      </div>
+      <button id="spin" type="button">🎡 SPIN NOW</button>
+      <div id="result">Good Luck! 💜</div>
+    </section>
 
-<section class="panel wheel-panel">
-<h2 style="color:#ffe18a">🎡 Lucky Spin</h2>
-<p>Try your luck and win virtual coins</p>
-<div class="wheel-wrap">
-<div class="pointer">▼</div>
-<div id="wheel"><div class="labels">
-<span>10</span><span>20</span><span>30</span><span>50</span><span>100</span><span>500</span>
-</div></div>
-</div>
-<button id="spin" onclick="spinWheel()">🎡 SPIN NOW</button>
-<div id="result">Good Luck! 💜</div>
-</section>
+    <div class="section-title"><h2>🎮 All Games</h2><small>10 games</small></div>
+    <section class="games">
+      <div class="game"><span class="emoji">🎡</span><b>Lucky Spin</b><small>Available now</small></div>
+      <div class="game"><span class="emoji">✈️</span><b>Aviator</b><small>Coming soon</small></div>
+      <div class="game"><span class="emoji">🃏</span><b>Teen Patti</b><small>Coming soon</small></div>
+      <div class="game"><span class="emoji">🎣</span><b>Ice Fishing Roulette</b><small>Coming soon</small></div>
+      <div class="game"><span class="emoji">🟠</span><b>Andar Bahar</b><small>Coming soon</small></div>
+      <div class="game"><span class="emoji">🚀</span><b>Skyward</b><small>Coming soon</small></div>
+      <div class="game"><span class="emoji">🎰</span><b>Live Casino</b><small>Coming soon</small></div>
+      <div class="game"><span class="emoji">🐉</span><b>Dragon Tiger</b><small>Coming soon</small></div>
+      <div class="game"><span class="emoji">🏏</span><b>Live Cricket</b><small>Demo not connected</small></div>
+      <div class="game"><span class="emoji">🎰</span><b>Slots</b><small>Coming soon</small></div>
+    </section>
 
-<div class="section-title"><h2>🎮 All Games</h2><small>10 games</small></div>
+    <section class="panel" id="historyPanel">
+      <h2 style="color:#ffe18a">📜 Spin History</h2>
+      <div id="spinHistory">Abhi koi spin history nahi hai.</div>
+    </section>
+    <div style="text-align:center"><button class="pinkbtn" id="logoutButton" type="button">LOGOUT</button></div>
+  </div>
 
-<section class="games" id="gamesGrid">
-<div class="game" onclick="openGame('spin')"><span class="emoji">🎡</span><b>Lucky Spin</b><small>Available now</small></div>
-<div class="game" onclick="openGame('aviator')"><span class="emoji">✈️</span><b>Aviator</b><small>Play demo</small></div>
-<div class="game" onclick="openGame('teen')"><span class="emoji">🃏</span><b>Teen Patti</b><small>Play demo</small></div>
-<div class="game" onclick="openGame('fishing')"><span class="emoji">🎣</span><b>Ice Fishing Roulette</b><small>Play demo</small></div>
-<div class="game" onclick="openGame('andar')"><span class="emoji">🟠</span><b>Andar Bahar</b><small>Play demo</small></div>
-<div class="game" onclick="openGame('skyward')"><span class="emoji">🚀</span><b>Skyward</b><small>Play demo</small></div>
-<div class="game" onclick="openGame('casino')"><span class="emoji">🎰</span><b>Live Casino</b><small>Play demo</small></div>
-<div class="game" onclick="openGame('dragon')"><span class="emoji">🐉</span><b>Dragon Tiger</b><small>Play demo</small></div>
-<div class="game" onclick="openGame('cricket')"><span class="emoji">🏏</span><b>Live Cricket</b><small>Cricket demo</small></div>
-<div class="game" onclick="openGame('slots')"><span class="emoji">🎰</span><b>Slots</b><small>Play demo</small></div>
-</section>
-
-<section class="panel hidden" id="gameScreen">
-<button onclick="closeGame()">⬅ BACK</button>
-<h2 id="gameTitle" style="color:#ffe18a;text-align:center">Game</h2>
-<div id="gameContent"></div>
-<p class="coin-info">Current coins: <span id="gameCoins">0</span></p>
-<p id="gameMessage" style="color:#ffe18a;text-align:center;min-height:25px"></p>
-</section>
-
-<section class="panel" id="historyPanel">
-<h2 style="color:#ffe18a">📜 Spin & Game History</h2>
-<div id="spinHistory">Abhi koi history nahi hai.</div>
-</section>
-
-<section class="panel">
-<h3 style="color:#ffe18a">👤 Profile</h3>
-<p id="profilePhone">Login required</p>
-<button class="pinkbtn" onclick="logout()">LOGOUT</button>
-</section>
-
-<section class="panel">
-<h3 style="color:#ffe18a">💬 Support</h3>
-<p>Your Luck Demo Support</p>
-<p>Ye free virtual coin demo website hai.</p>
-</section>
-
-</div>
-<p class="note">Virtual coin demo only. No real money, betting or cash prizes.</p>
+  <p class="note">Virtual coin demo only. No real money, betting or cash prizes. Other games are display tiles only.</p>
 </main>
 
 <nav class="bottom-nav">
-<button onclick="goHome()"><span>🏠</span>Home</button>
-<button onclick="goHistory()"><span>📜</span>History</button>
-<button onclick="showWallet()"><span>🪙</span>Wallet</button>
-<button onclick="showProfile()"><span>👤</span>Profile</button>
-<button onclick="showSupport()"><span>💬</span>Support</button>
+  <button id="homeButton" type="button"><span>🏠</span>Home</button>
+  <button id="historyButton" type="button"><span>📜</span>History</button>
+  <button id="walletButton" type="button"><span>🪙</span>Wallet</button>
+  <button id="profileButton" type="button"><span>👤</span>Profile</button>
+  <button id="supportButton" type="button"><span>💬</span>Support</button>
 </nav>
 
-<script type="module">
-import {initializeApp} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
-import {getAuth,RecaptchaVerifier,signInWithPhoneNumber,onAuthStateChanged,signOut} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
-
+<script>
 const firebaseConfig = {
-apiKey: "AIzaSyBicVV0lgCfC_WbjZR0LJ0hixXDPq56dj8",
-authDomain: "your-luck-82ad2.firebaseapp.com",
-projectId: "your-luck-82ad2",
-storageBucket: "your-luck-82ad2.firebasestorage.app",
-messagingSenderId: "979385333086",
-appId: "1:979385333086:web:4233924ebfec9ac56f4bcf",
-measurementId: "G-71H8LR9381"
+  apiKey: "AIzaSyBicVV0lgCfC_WbjZR0LJ0hixXDPq56dj8",
+  authDomain: "your-luck-82ad2.firebaseapp.com",
+  projectId: "your-luck-82ad2",
+  storageBucket: "your-luck-82ad2.firebasestorage.app",
+  messagingSenderId: "979385333086",
+  appId: "1:979385333086:web:4233924ebfec9ac56f4bcf",
+  measurementId: "G-71H8LR9381"
 };
 
-const app=initializeApp(firebaseConfig);
-const auth=getAuth(app);
-let confirmationResult=null;
-let recaptchaVerifier=null;
-const message=document.getElementById("authMessage");
+const message = document.getElementById("authMessage");
+const sendButton = document.getElementById("sendButton");
+const verifyButton = document.getElementById("verifyButton");
 
-let total=0,rotation=0,spinning=false;
-const prizes=[10,20,30,50,100,500];
-let currentGame="";
+let auth = null;
+let firebaseAuth = null;
+let confirmationResult = null;
+let recaptchaVerifier = null;
+let firebaseReady = false;
+let firebaseLoadError = null;
+let total = 0;
+let rotation = 0;
+let spinning = false;
 
-function saveCoins(){
-const user=auth.currentUser;
-document.getElementById("topCoins").textContent=total;
-document.getElementById("gameCoins").textContent=total;
-if(user)localStorage.setItem("yourLuckCoins_"+user.uid,String(total));
+function showMessage(text) {
+  message.textContent = text;
 }
 
-function loadWallet(uid){
-const saved=localStorage.getItem("yourLuckCoins_"+uid);
-total=saved===null?2500:(Number(saved)||0);
-saveCoins();
+async function loadFirebase() {
+  try {
+    showMessage("Login system connect ho raha hai...");
+
+    const [appModule, authModule] = await Promise.all([
+      import("https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js"),
+      import("https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js")
+    ]);
+
+    const app = appModule.initializeApp(firebaseConfig);
+    auth = authModule.getAuth(app);
+    firebaseAuth = authModule;
+
+    firebaseAuth.onAuthStateChanged(auth, user => {
+      document.getElementById("authBox").classList.toggle("hidden", !!user);
+      document.getElementById("gameBox").classList.toggle("hidden", !user);
+
+      if (user) {
+        loadWallet(user.uid);
+        showSpinHistory();
+      }
+    });
+
+    firebaseReady = true;
+    showMessage("Apna mobile number enter karein.");
+
+  } catch (error) {
+    console.error("Firebase loading error:", error);
+    firebaseLoadError = error;
+    showMessage("Firebase load error: " + (error.message || "Connection failed"));
+  }
 }
 
-function addHistory(title,amount){
-const user=auth.currentUser;
-if(!user)return;
-const key="spinHistory_"+user.uid;
-let history=JSON.parse(localStorage.getItem(key)||"[]");
-history.unshift({title,amount,date:new Date().toLocaleString("en-IN")});
-localStorage.setItem(key,JSON.stringify(history.slice(0,50)));
-showSpinHistory();
-}
+sendButton.addEventListener("click", async function() {
+  if (!firebaseReady) {
+    if (firebaseLoadError) {
+      showMessage("Firebase load nahi hua: " + firebaseLoadError.message);
+    } else {
+      showMessage("Login system load ho raha hai. Kuch seconds baad try karein.");
+    }
+    return;
+  }
 
-function showSpinHistory(){
-const user=auth.currentUser;
-const box=document.getElementById("spinHistory");
-if(!user||!box)return;
-const history=JSON.parse(localStorage.getItem("spinHistory_"+user.uid)||"[]");
-box.innerHTML=history.length?history.map(item=>'<div class="history-item">🎮 '+item.title+' — '+(item.amount>=0?"+":"")+item.amount+' coins — '+item.date+'</div>').join(""):"Abhi koi history nahi hai.";
-}
+  const mobile = document.getElementById("mobile").value.trim();
 
-window.sendOTP=async function(){
-const mobile=document.getElementById("mobile").value.trim();
-if(!/^[6-9]\d{9}$/.test(mobile)){
-message.textContent="Sahi 10 digit mobile number dalo.";
-return;
-}
-try{
-message.textContent="OTP bheja ja raha hai...";
-document.getElementById("sendButton").disabled=true;
-if(recaptchaVerifier)recaptchaVerifier.clear();
-recaptchaVerifier=new RecaptchaVerifier(auth,"recaptcha-container",{size:"normal"});
-await recaptchaVerifier.render();
-confirmationResult=await signInWithPhoneNumber(auth,"+91"+mobile,recaptchaVerifier);
-message.textContent="OTP bhej diya gaya hai.";
-}catch(error){
-message.textContent="OTP error: "+error.message;
-document.getElementById("sendButton").disabled=false;
-}
-};
+  if (!/^[6-9]\d{9}$/.test(mobile)) {
+    showMessage("Sahi 10 digit mobile number dalo.");
+    return;
+  }
 
-window.verifyOTP=async function(){
-const otp=document.getElementById("otp").value.trim();
-if(!confirmationResult){message.textContent="Pehle Send OTP dabao.";return;}
-if(!otp){message.textContent="OTP dalo.";return;}
-try{
-await confirmationResult.confirm(otp);
-message.textContent="Mobile verify ho gaya!";
-}catch(error){
-message.textContent="OTP galat hai ya expire ho gaya.";
-}
-};
+  sendButton.disabled = true;
 
-onAuthStateChanged(auth,user=>{
-document.getElementById("authBox").classList.toggle("hidden",!!user);
-document.getElementById("gameBox").classList.toggle("hidden",!user);
-if(user){
-loadWallet(user.uid);
-document.getElementById("profilePhone").textContent="Mobile: "+(user.phoneNumber||"Verified");
-showSpinHistory();
-}
+  try {
+    showMessage("reCAPTCHA load ho raha hai...");
+
+    if (recaptchaVerifier) {
+      recaptchaVerifier.clear();
+      recaptchaVerifier = null;
+    }
+
+    document.getElementById("recaptcha-container").innerHTML = "";
+
+    recaptchaVerifier = new firebaseAuth.RecaptchaVerifier(
+      auth,
+      "recaptcha-container",
+      {
+        size: "normal"
+      }
+    );
+
+    await recaptchaVerifier.render();
+
+    showMessage("OTP request bheji ja rahi hai...");
+
+    confirmationResult = await firebaseAuth.signInWithPhoneNumber(
+      auth,
+      "+91" + mobile,
+      recaptchaVerifier
+    );
+
+    showMessage("OTP bhej diya gaya hai. Apna SMS check karein.");
+  } catch (error) {
+    console.error("OTP error:", error);
+    showMessage("OTP error: " + (error.message || error.code || "Dobara try karein."));
+
+    if (recaptchaVerifier) {
+      try { recaptchaVerifier.clear(); } catch(e) {}
+      recaptchaVerifier = null;
+    }
+  } finally {
+    sendButton.disabled = false;
+  }
 });
 
-window.logout=async function(){
-await signOut(auth);
-};
+verifyButton.addEventListener("click", async function() {
+  if (!firebaseReady) {
+    showMessage("Login system abhi load nahi hua.");
+    return;
+  }
 
-window.spinWheel=function(){
-if(!auth.currentUser)return;
-if(spinning)return;
-spinning=true;
-const btn=document.getElementById("spin");
-btn.disabled=true;
-document.getElementById("result").textContent="✨ Spinning...";
-const index=Math.floor(Math.random()*prizes.length);
-const prize=prizes[index];
-const angle=360-index*60-30;
-rotation+=1800+angle-(rotation%360);
-document.getElementById("wheel").style.transform="rotate("+rotation+"deg)";
-setTimeout(()=>{
-total+=prize;
-saveCoins();
-document.getElementById("result").textContent="🎉 You won "+prize+" virtual coins!";
-addHistory("Lucky Spin",prize);
-btn.disabled=false;
-spinning=false;
-},5100);
-};
+  if (!confirmationResult) {
+    showMessage("Pehle SEND OTP dabao.");
+    return;
+  }
 
-const gameNames={
-aviator:"✈️ Aviator Demo",
-teen:"🃏 Teen Patti Demo",
-fishing:"🎣 Ice Fishing Roulette",
-andar:"🟠 Andar Bahar Demo",
-skyward:"🚀 Skyward Demo",
-casino:"🎰 Live Casino Demo",
-dragon:"🐉 Dragon Tiger Demo",
-cricket:"🏏 Live Cricket Demo",
-slots:"🎰 Slots Demo"
-};
+  const otp = document.getElementById("otp").value.trim();
 
-window.openGame=function(id){
-if(id==="spin"){
-document.getElementById("wheel").scrollIntoView({behavior:"smooth"});
-return;
-}
-currentGame=id;
-document.getElementById("gameScreen").classList.remove("hidden");
-document.getElementById("gameTitle").textContent=gameNames[id]||"Game";
-document.getElementById("gameMessage").textContent="Har round ka demo cost 10 virtual coins hai.";
-document.getElementById("gameCoins").textContent=total;
-let html="";
-if(id==="aviator")html='<p>✈️ Plane kitna upar jayega?</p><button onclick="playDemo()">START FLIGHT</button>';
-if(id==="teen")html='<p>🃏 Apne 3 cards try karo!</p><button onclick="playDemo()">DEAL CARDS</button>';
-if(id==="fishing")html='<p>🎣 Fishing wheel ghumao!</p><button onclick="playDemo()">CAST LINE</button>';
-if(id==="andar")html='<p>Choose a side:</p><button onclick="playDemo(\\'Andar\\')">ANDAR</button><button onclick="playDemo(\\'Bahar\\')">BAHAR</button>';
-if(id==="skyward")html='<p>🚀 Rocket launch karo!</p><button onclick="playDemo()">LAUNCH</button>';
-if(id==="casino")html='<p>Dice game: High ya Low choose karo.</p><button onclick="playDemo(\\'High\\')">HIGH</button><button onclick="playDemo(\\'Low\\')">LOW</button>';
-if(id==="dragon")html='<p>Dragon ya Tiger choose karo.</p><button onclick="playDemo(\\'Dragon\\')">🐉 DRAGON</button><button onclick="playDemo(\\'Tiger\\')">🐅 TIGER</button>';
-if(id==="cricket")html='<p>Next ball par kitne runs?</p><button onclick="playDemo(\\'1\\')">1 RUN</button><button onclick="playDemo(\\'2\\')">2 RUNS</button><button onclick="playDemo(\\'4\\')">4 RUNS</button><button onclick="playDemo(\\'6\\')">6 RUNS</button>';
-if(id==="slots")html='<p>🎰 Match the symbols!</p><button onclick="playDemo()">SPIN SLOTS</button>';
-document.getElementById("gameContent").innerHTML=html;
-document.getElementById("gameScreen").scrollIntoView({behavior:"smooth"});
-};
+  if (!/^\d{6}$/.test(otp)) {
+    showMessage("6 digit OTP dalo.");
+    return;
+  }
 
-window.closeGame=function(){
-document.getElementById("gameScreen").classList.add("hidden");
-currentGame="";
-};
+  verifyButton.disabled = true;
 
-window.playDemo=function(choice=""){
-if(!auth.currentUser)return;
-const cost=10;
-if(total<cost){
-document.getElementById("gameMessage").textContent="Coins kam hain. Lucky Spin khelo!";
-return;
-}
-total-=cost;
-let win=Math.random()<0.48;
-let reward=win?20:0;
-let detail="Round complete.";
+  try {
+    await confirmationResult.confirm(otp);
+    showMessage("Mobile verify ho gaya!");
+  } catch (error) {
+    console.error("Verify error:", error);
+    showMessage("OTP galat ya expire ho gaya: " + (error.message || error.code));
+  } finally {
+    verifyButton.disabled = false;
+  }
+});
 
-if(currentGame==="aviator"){
-let multiplier=(1+Math.random()*3).toFixed(2);
-detail="✈️ Flight multiplier: "+multiplier+"x";
-win=Number(multiplier)>=2;
-reward=win?30:0;
-}
-else if(currentGame==="teen"){
-const cards=["A♠ K♥ Q♦","A♥ A♣ 9♦","K♠ 8♦ 4♥","Q♣ J♦ 10♠"];
-detail="Your cards: "+cards[Math.floor(Math.random()*cards.length)];
-win=Math.random()<0.45;
-reward=win?30:0;
-}
-else if(currentGame==="fishing"){
-const fish=["🐟 Small fish","🐠 Golden fish","🦈 Big catch","🧊 No catch"];
-const caught=fish[Math.floor(Math.random()*fish.length)];
-detail=caught;
-win=!caught.includes("No catch");
-reward=win?30:0;
-}
-else if(currentGame==="andar"){
-const side=Math.random()<0.5?"Andar":"Bahar";
-detail="Card came on "+side;
-win=choice===side;
-reward=win?30:0;
-}
-else if(currentGame==="skyward"){
-const height=(Math.random()*5+1).toFixed(1);
-detail="🚀 Rocket reached "+height+" km";
-win=Number(height)>3;
-reward=win?30:0;
-}
-else if(currentGame==="casino"){
-const dice=Math.floor(Math.random()*12)+1;
-const side=dice>=7?"High":"Low";
-detail="🎲 Dice number: "+dice+" ("+side+")";
-win=choice===side;
-reward=win?30:0;
-}
-else if(currentGame==="dragon"){
-const dragon=Math.floor(Math.random()*13)+1;
-const tiger=Math.floor(Math.random()*13)+1;
-detail="Dragon: "+dragon+" | Tiger: "+tiger;
-const winner=dragon>tiger?"Dragon":tiger>dragon?"Tiger":"Tie";
-detail+=" — "+winner;
-win=choice===winner;
-reward=win?30:0;
-}
-else if(currentGame==="cricket"){
-const runs=[0,1,2,4,6][Math.floor(Math.random()*5)];
-detail="🏏 Ball result: "+runs+" runs";
-win=Number(choice)===runs;
-reward=win?30:0;
-}
-else if(currentGame==="slots"){
-const symbols=["🍒","💎","⭐","7️⃣","🍀"];
-const a=symbols[Math.floor(Math.random()*symbols.length)];
-const b=symbols[Math.floor(Math.random()*symbols.length)];
-const c=symbols[Math.floor(Math.random()*symbols.length)];
-detail=a+" | "+b+" | "+c;
-win=a===b&&b===c;
-reward=win?100:0;
+function loadWallet(uid) {
+  total = Number(localStorage.getItem("yourLuckCoins_" + uid)) || 0;
+  updateWallet();
 }
 
-total+=reward;
-saveCoins();
-const net=reward-cost;
-document.getElementById("gameMessage").textContent=detail+" "+(win?"🎉 You won "+reward+" coins!":"Try again! No reward.")+" Net: "+net+" coins.";
-addHistory(gameNames[currentGame]||"Game",net);
-};
+function updateWallet() {
+  document.getElementById("topCoins").textContent = total;
 
-window.goHome=()=>window.scrollTo({top:0,behavior:"smooth"});
-window.goHistory=()=>document.getElementById("historyPanel").scrollIntoView({behavior:"smooth"});
-window.showWallet=()=>alert("Your virtual coins: "+total);
-window.showProfile=()=>alert("Profile: "+(auth.currentUser?auth.currentUser.phoneNumber:"Login required"));
-window.showSupport=()=>alert("YOUR LUCK demo support");
+  if (auth && auth.currentUser) {
+    localStorage.setItem("yourLuckCoins_" + auth.currentUser.uid, String(total));
+  }
+}
 
+document.getElementById("spin").addEventListener("click", function() {
+  if (!auth || !auth.currentUser) {
+    document.getElementById("result").textContent = "Pehle login karo!";
+    return;
+  }
+
+  if (spinning) return;
+
+  spinning = true;
+
+  const btn = document.getElementById("spin");
+  btn.disabled = true;
+  document.getElementById("result").textContent = "✨ Spinning...";
+
+  const prizes = [10, 20, 30, 50, 100, 500];
+  const index = Math.floor(Math.random() * prizes.length);
+  const prize = prizes[index];
+  const angle = 360 - index * 60 - 30;
+
+  rotation += 1800 + angle - (rotation % 360);
+  document.getElementById("wheel").style.transform = "rotate(" + rotation + "deg)";
+
+  setTimeout(() => {
+    total += prize;
+    updateWallet();
+
+    document.getElementById("result").textContent =
+      "🎉 Congratulations! You won " + prize + " coins!";
+
+    const user = auth.currentUser;
+
+    if (user) {
+      const key = "spinHistory_" + user.uid;
+      const history = JSON.parse(localStorage.getItem(key) || "[]");
+
+      history.unshift({
+        prize: prize,
+        date: new Date().toLocaleString("en-IN")
+      });
+
+      localStorage.setItem(key, JSON.stringify(history.slice(0, 50)));
+    }
+
+    showSpinHistory();
+    btn.disabled = false;
+    spinning = false;
+  }, 5100);
+});
+
+function showSpinHistory() {
+  const user = auth && auth.currentUser;
+  const box = document.getElementById("spinHistory");
+
+  if (!user || !box) return;
+
+  const history = JSON.parse(
+    localStorage.getItem("spinHistory_" + user.uid) || "[]"
+  );
+
+  box.innerHTML = history.length
+    ? history.map(item =>
+        '<div class="history-item">🎁 ' +
+        item.prize + ' Coins — ' + item.date +
+        '</div>'
+      ).join("")
+    : "Abhi koi spin history nahi hai.";
+}
+
+document.getElementById("logoutButton").addEventListener("click", async function() {
+  if (auth && firebaseAuth) {
+    await firebaseAuth.signOut(auth);
+  }
+});
+
+document.getElementById("homeButton").addEventListener("click", () => {
+  window.scrollTo({top: 0, behavior: "smooth"});
+});
+
+document.getElementById("historyButton").addEventListener("click", () => {
+  document.getElementById("historyPanel").scrollIntoView({behavior: "smooth"});
+});
+
+document.getElementById("walletButton").addEventListener("click", () => {
+  alert("Aapke virtual coins: " + total);
+});
+
+document.getElementById("profileButton").addEventListener("click", () => {
+  alert("Profile: " + (auth && auth.currentUser ? auth.currentUser.phoneNumber : "Login required"));
+});
+
+document.getElementById("supportButton").addEventListener("click", () => {
+  alert("Support: Your Luck demo support");
+});
+
+loadFirebase();
 </script>
+
 </body>
 </html>
