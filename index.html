@@ -108,42 +108,87 @@ button:disabled{opacity:.55}
       <div class="game"><span class="emoji">🏏</span><b>Live Cricket</b><small>Demo not connected</small></div>
       <div class="game"><span class="emoji">🎰</span><b>Slots</b><small>Coming soon</small></div>
     </section>
-    <div id="aviatorScreen" style="display:none; position:fixed; inset:0; z-index:9999; background:linear-gradient(#42b8ef,#e5f8ff); overflow-y:auto; padding:18px; text-align:center; color:#12345a;">
+    <div id="aviatorScreen" style="display:none;position:fixed;inset:0;z-index:9999;background:linear-gradient(180deg,#8bdcff 0%,#dff6ff 75%,#ffffff 100%);overflow-y:auto;padding:16px;text-align:center;color:#153b60;">
 
 <style>
-#aviatorScreen .sky {
-  height:280px;
-  border-radius:20px;
-  background:linear-gradient(#38aeea,#d8f5ff);
+#aviatorScreen .avi-top {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px;
+  font-weight:bold;
+}
+#aviatorScreen .avi-sky {
+  height:300px;
   position:relative;
   overflow:hidden;
-  margin:18px 0;
+  border-radius:24px;
+  background:linear-gradient(180deg,#55c5f5,#c5efff);
+  border:3px solid white;
+  box-shadow:0 8px 25px #429bc755;
+  margin:15px 0;
 }
-#aviatorScreen .cloud {
+#aviatorScreen .white-cloud {
   position:absolute;
-  font-size:65px;
-  animation:aviCloud 12s linear infinite;
+  font-size:85px;
+  filter:drop-shadow(0 5px 5px #ffffff66);
+  animation:cloudMove 18s linear infinite;
 }
-@keyframes aviCloud {
-  from {transform:translateX(350px)}
-  to {transform:translateX(-450px)}
+#aviatorScreen .cloud-two {
+  top:120px;
+  left:55%;
+  font-size:100px;
+  animation-duration:24s;
+}
+#aviatorScreen .cloud-one {
+  top:20px;
+  left:10%;
+}
+@keyframes cloudMove {
+  from {transform:translateX(280px)}
+  to {transform:translateX(-650px)}
 }
 #aviatorScreen #plane {
   position:absolute;
-  left:20px;
+  left:25px;
   bottom:35px;
   font-size:65px;
+  z-index:3;
   transition:transform .15s linear;
+  filter:drop-shadow(0 5px 5px #2877a866);
+}
+#aviatorScreen .multiplier-box {
+  background:#ffffffdd;
+  border:2px solid white;
+  border-radius:20px;
+  padding:12px;
+  margin:15px 0;
+  box-shadow:0 5px 18px #3689ad33;
 }
 #aviatorScreen #multiplier {
   font-size:48px;
-  color:#073e79;
+  margin:5px;
+  color:#0879bd;
+}
+#aviatorScreen .avi-controls {
+  background:#ffffffdd;
+  border-radius:20px;
+  padding:18px 10px;
+  box-shadow:0 5px 18px #3689ad33;
+}
+#aviatorScreen input {
+  padding:14px;
+  width:130px;
+  border:2px solid #8bdcff;
+  border-radius:12px;
+  text-align:center;
+  font-size:17px;
 }
 #aviatorScreen button {
   padding:14px 22px;
-  margin:6px;
+  margin:7px;
   border:0;
-  border-radius:12px;
+  border-radius:13px;
   font-weight:bold;
   font-size:16px;
 }
@@ -152,43 +197,45 @@ button:disabled{opacity:.55}
   color:white;
 }
 #aviatorScreen #aviatorCashout {
-  background:#19a66b;
+  background:#16a66a;
   color:white;
 }
 #aviatorScreen .back {
-  background:#173c65;
-  color:white;
-}
-#aviatorScreen input {
-  padding:13px;
-  border-radius:10px;
-  width:130px;
+  background:#ffffff;
+  color:#17618d;
+  border:2px solid #8bdcff;
 }
 </style>
 
-<h2>✈️ YOUR LUCK AVIATOR</h2>
+<div class="avi-top">
+  <span>✈️ YOUR LUCK</span>
+  <span>🪙 DEMO GAME</span>
+</div>
 
-<div class="sky">
-  <div class="cloud" style="top:25px;left:20px">☁️</div>
-  <div class="cloud" style="top:130px;left:180px">☁️</div>
+<h2>AVIATOR</h2>
+
+<div class="avi-sky">
+  <div class="white-cloud cloud-one">☁️</div>
+  <div class="white-cloud cloud-two">☁️</div>
   <div id="plane">✈️</div>
 </div>
 
-<h1 id="multiplier">1.00x</h1>
-<p id="aviatorMessage">Ready to Fly!</p>
-<p>🪙 Virtual coins only</p>
+<div class="multiplier-box">
+  <p>FLIGHT MULTIPLIER</p>
+  <h1 id="multiplier">1.00x</h1>
+  <p id="aviatorMessage">Ready to Fly!</p>
+</div>
 
-<input id="aviatorBet" type="number" value="10" min="1">
-
-<br><br>
-
-<button id="aviatorStart" onclick="startAviator()">START</button>
-<button id="aviatorCashout" onclick="cashOutAviator()" disabled>CASH OUT</button>
+<div class="avi-controls">
+  <p>🪙 Virtual Coins Only</p>
+  <input id="aviatorBet" type="number" value="10" min="1">
+  <br>
+  <button id="aviatorStart" onclick="startAviator()">✈️ START</button>
+  <button id="aviatorCashout" onclick="cashOutAviator()" disabled> CASH OUT </button>
+</div>
 
 <br>
-
 <button class="back" onclick="closeAviator()">← BACK HOME</button>
-
 <p>No real money, betting or cash prizes.</p>
 </div>
 
