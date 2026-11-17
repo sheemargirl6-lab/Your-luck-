@@ -94,7 +94,11 @@ button:disabled{opacity:.55}
     <div class="section-title"><h2>🎮 All Games</h2><small>10 games</small></div>
     <section class="games">
       <div class="game"><span class="emoji">🎡</span><b>Lucky Spin</b><small>Available now</small></div>
-      <div class="game"><span class="emoji">✈️</span><b>Aviator</b><small>Coming soon</small></div>
+      <div class="game" id="aviatorGame" onclick="openAviator()">
+  <span class="emoji">✈️</span>
+  <b>Aviator</b>
+  <small>Play demo</small>
+</div>
       <div class="game"><span class="emoji">🃏</span><b>Teen Patti</b><small>Coming soon</small></div>
       <div class="game"><span class="emoji">🎣</span><b>Ice Fishing Roulette</b><small>Coming soon</small></div>
       <div class="game"><span class="emoji">🟠</span><b>Andar Bahar</b><small>Coming soon</small></div>
@@ -104,6 +108,18 @@ button:disabled{opacity:.55}
       <div class="game"><span class="emoji">🏏</span><b>Live Cricket</b><small>Demo not connected</small></div>
       <div class="game"><span class="emoji">🎰</span><b>Slots</b><small>Coming soon</small></div>
     </section>
+    <div id="aviatorScreen" style="display:none;padding:20px;text-align:center;background:#17152e;border-radius:15px;color:white;margin:15px 0;">
+  <h2>✈️ AVIATOR DEMO</h2>
+  <div id="plane" style="font-size:65px;margin:20px;">✈️</div>
+  <h1 id="multiplier">1.00x</h1>
+  <p id="aviatorMessage">Ready to fly!</p>
+  <input id="aviatorBet" type="number" value="10" min="1" placeholder="Virtual coins">
+  <br><br>
+  <button id="aviatorStart" onclick="startAviator()">START</button>
+  <button id="aviatorCashout" onclick="cashOutAviator()" disabled>CASH OUT</button>
+  <button onclick="closeAviator()">BACK</button>
+  <p>Virtual coins only • No real money</p>
+</div>
 
     <section class="panel" id="historyPanel">
       <h2 style="color:#ffe18a">📜 Spin History</h2>
@@ -384,6 +400,91 @@ document.getElementById("supportButton").addEventListener("click", () => {
   alert("Support: Your Luck demo support");
 });
 
+  let aviatorTimer = null;
+let aviatorMultiplier = 1;
+let aviatorCrashPoint = 0;
+let aviatorBetAmount = 0;
+let aviatorRunning = false;
+
+function openAviator() {
+  document.getElementById("aviatorScreen").style.display = "block";
+  document.getElementById("aviatorScreen").scrollIntoView({behavior:"smooth"});
+}
+
+function closeAviator() {
+  if (aviatorRunning) {
+    document.getElementById("aviatorMessage").textContent = "Round khatam hone do!";
+    return;
+  }
+  document.getElementById("aviatorScreen").style.display = "none";
+}
+
+function startAviator() {
+  if (aviatorRunning) return;
+
+  const bet = Number(document.getElementById("aviatorBet").value);
+
+  if (!Number.isInteger(bet) || bet <= 0) {
+    alert("Sahi virtual coins dalo!");
+    return;
+  }
+
+  if (bet > total) {
+    alert("Aapke paas itne coins nahi hain!");
+    return;
+  }
+
+  aviatorBetAmount = bet;
+  total -= bet;
+  updateWallet();
+
+  aviatorMultiplier = 1;
+  aviatorCrashPoint = 1.2 + Math.random() * 3.8;
+  aviatorRunning = true;
+
+  document.getElementById("multiplier").textContent = "1.00x";
+  document.getElementById("aviatorMessage").textContent = "✈️ Plane flying!";
+  document.getElementById("aviatorStart").disabled = true;
+  document.getElementById("aviatorCashout").disabled = false;
+
+  aviatorTimer = setInterval(() => {
+    aviatorMultiplier += 0.02;
+    document.getElementById("multiplier").textContent =
+      aviatorMultiplier.toFixed(2) + "x";
+
+    document.getElementById("plane").style.transform =
+      "translateY(-" + Math.min(aviatorMultiplier * 12, 150) + "px)";
+
+    if (aviatorMultiplier >= aviatorCrashPoint) {
+      clearInterval(aviatorTimer);
+      aviatorRunning = false;
+
+      document.getElementById("aviatorMessage").textContent =
+        "💥 Plane crashed! Virtual coins lost.";
+
+      document.getElementById("aviatorStart").disabled = false;
+      document.getElementById("aviatorCashout").disabled = true;
+    }
+  }, 100);
+}
+
+function cashOutAviator() {
+  if (!aviatorRunning) return;
+
+  clearInterval(aviatorTimer);
+  aviatorRunning = false;
+
+  const win = Math.floor(aviatorBetAmount * aviatorMultiplier);
+  total += win;
+  updateWallet();
+
+  document.getElementById("aviatorMessage").textContent =
+    "🎉 Cash Out! Won " + win + " virtual coins!";
+
+  document.getElementById("aviatorStart").disabled = false;
+  document.getElementById("aviatorCashout").disabled = true;
+  document.getElementById("plane").style.transform = "translateY(0)";
+}
 loadFirebase();
 </script>
 
